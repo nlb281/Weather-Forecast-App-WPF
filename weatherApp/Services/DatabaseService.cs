@@ -64,7 +64,7 @@ public class DatabaseService
     {
         var command = connection.CreateCommand();
         command.CommandText = @"
-            INSERT OR IGNORE  INTO Settings (id, theme, lastCity)
+            INSERT OR IGNORE INTO Settings (id, theme, lastCity)
             VALUES (1, 'light', 'Москва')
         ";
         

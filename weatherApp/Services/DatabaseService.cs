@@ -21,9 +21,16 @@ public class DatabaseService
         
         connection.Open();
         
+        Console.WriteLine("БД открыта/создана");
+    
         CreateSettingsTable(connection);
-        CreateWeatherRecordsTable(connection);
+        Console.WriteLine("Таблица Settings создана");
+    
+        CreateFavoriteCitiesTable(connection);
+        Console.WriteLine("Таблица FavoriteCities создана");
+    
         InsertInitialData(connection);
+        Console.WriteLine("Начальные данные вставлены");
     }
 
     public void CreateSettingsTable(SqliteConnection connection)
@@ -40,7 +47,7 @@ public class DatabaseService
         command.ExecuteNonQuery();
     }
     
-    public void CreateWeatherRecordsTable(SqliteConnection connection)
+    public void CreateFavoriteCitiesTable(SqliteConnection connection)
     {
         var command = connection.CreateCommand();
         command.CommandText = @"

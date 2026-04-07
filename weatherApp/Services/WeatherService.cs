@@ -37,7 +37,7 @@ public class WeatherService
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка получения данных погоды: {ex.Message}");
+            Console.WriteLine($"Error receiving weather data: {ex.Message}");
             return null;
         }
     }

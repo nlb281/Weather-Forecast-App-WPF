@@ -18,7 +18,7 @@ public class WeatherService
         _httpClient.DefaultRequestHeaders.Add("X-Yandex-Weather-Key", _apiKey);
     }
     
-    public async Task<WeatherService?> GetCoords(double latitude, double longitude)
+    public async Task<WeatherService?> GetWeather(double latitude, double longitude)
     {
         try
         {

@@ -31,7 +31,7 @@ public class GeocodingService
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка получения данных погоды: {ex.Message}");
+            Console.WriteLine($"Error getting city coordinates: {ex.Message}");
             return null;
         }
     }

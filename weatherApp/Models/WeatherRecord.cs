@@ -2,7 +2,7 @@
 
 namespace weatherApp.Models;
 
-public class YandexWeatherResponse
+public class WeatherResponse
 {
     [JsonPropertyName("fact")]
     public Fact Fact { get; set; } = new();

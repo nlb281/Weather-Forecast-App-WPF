@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Globalization;
+using System.Net.Http;
 using System.Text.Json;
 using weatherApp.Models;
 
@@ -22,7 +23,10 @@ public class WeatherService
     {
         try
         {
-            string url = $"{BaseUrl}/forecast?lat={latitude}&lon={longitude}&lang=ru_RU";
+            string latStr = latitude.ToString(CultureInfo.InvariantCulture);
+            string lonStr = longitude.ToString(CultureInfo.InvariantCulture);
+            
+            string url = $"{BaseUrl}forecast?lat={latStr}&lon={lonStr}&lang=ru_RU";
             var res = await _httpClient.GetAsync(url);
             
             if (!res.IsSuccessStatusCode)

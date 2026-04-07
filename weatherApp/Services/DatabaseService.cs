@@ -14,6 +14,11 @@ public class DatabaseService
   
         _connectionString = $"Data Source={dbPath}";
     }
+
+    public string GetConnectionString()
+    {
+        return _connectionString;
+    }
     
     public void InitializeDatabase()
     {

@@ -18,7 +18,7 @@ public class WeatherService
         _httpClient.DefaultRequestHeaders.Add("X-Yandex-Weather-Key", _apiKey);
     }
     
-    public async Task<WeatherService?> GetWeather(double latitude, double longitude)
+    public async Task<WeatherResponse?> GetWeatherByCoords(double latitude, double longitude)
     {
         try
         {
@@ -29,7 +29,7 @@ public class WeatherService
                 return null;
             
             string json = await res.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<WeatherService>(json);
+            return JsonSerializer.Deserialize<WeatherResponse>(json);
         }
         catch (Exception ex)
         {

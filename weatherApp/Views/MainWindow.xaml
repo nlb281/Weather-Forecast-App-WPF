@@ -3,10 +3,140 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:weatherApp"
+        xmlns:viewModels="clr-namespace:weatherApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="Weather App" Height="650" Width="500"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#F5F5F5"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+        
+        <Style x:Key="ValueStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#888888"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#FFFFFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#2196F3" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox Grid.Column="0" 
+                         Text="{Binding CityName}"
+                         Background="White"
+                         Foreground="#333333"
+                         FontSize="16"
+                         Padding="12,8"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"/>
+                
+                <Button Grid.Column="1" 
+                        Command="{Binding SearchWeatherCommand}"
+                        Content="Поиск"
+                        Background="White"
+                        Foreground="#2196F3"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Padding="15,8"
+                        Margin="10,0,0,0"
+                        BorderThickness="0"
+                        Cursor="Hand"/>
+            </Grid>
+        </Border>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20">
+                
+                <TextBlock Text="{Binding CityName}" 
+                           FontSize="28" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,5"/>
+                
+                <TextBlock Text="{Binding Condition}" 
+                           FontSize="16" 
+                           Foreground="#666666"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+                
+                <Border Style="{StaticResource CardStyle}" Background="#E3F2FD">
+                    <StackPanel>
+                        <TextBlock Text="ТЕМПЕРАТУРА" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Text="{Binding Temperature}" 
+                                   FontSize="64" 
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding FeelsLike}" 
+                                   Style="{StaticResource LabelStyle}"
+                                   Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <Grid Margin="0,0,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,5,5">
+                        <StackPanel>
+                            <TextBlock Text="ВЛАЖНОСТЬ" Style="{StaticResource LabelStyle}"/>
+                            <TextBlock Text="{Binding Humidity}" Style="{StaticResource ValueStyle}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="5,0,0,5">
+                        <StackPanel>
+                            <TextBlock Text="ДАВЛЕНИЕ" Style="{StaticResource LabelStyle}"/>
+                            <TextBlock Text="{Binding Pressure}" Style="{StaticResource ValueStyle}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,5,5,0">
+                        <StackPanel>
+                            <TextBlock Text="ВЕТЕР" Style="{StaticResource LabelStyle}"/>
+                            <TextBlock Text="{Binding WindSpeed}" Style="{StaticResource ValueStyle}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="5,5,0,0">
+                        <StackPanel>
+                            <TextBlock Text="СОСТОЯНИЕ" Style="{StaticResource LabelStyle}"/>
+                            <TextBlock Text="{Binding Condition}" 
+                                       Style="{StaticResource ValueStyle}"
+                                       FontSize="18"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

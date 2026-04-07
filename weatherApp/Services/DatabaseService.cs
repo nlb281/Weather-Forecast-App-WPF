@@ -26,16 +26,16 @@ public class DatabaseService
         
         connection.Open();
         
-        Console.WriteLine("БД открыта/создана");
+        Console.WriteLine("DB open/create");
     
         CreateSettingsTable(connection);
-        Console.WriteLine("Таблица Settings создана");
+        Console.WriteLine("The Settings table has been created");
     
         CreateFavoriteCitiesTable(connection);
-        Console.WriteLine("Таблица FavoriteCities создана");
+        Console.WriteLine("The FavoriteCities table has been created");
     
         InsertInitialData(connection);
-        Console.WriteLine("Начальные данные вставлены");
+        Console.WriteLine("Initial data inserted");
     }
 
     public void CreateSettingsTable(SqliteConnection connection)

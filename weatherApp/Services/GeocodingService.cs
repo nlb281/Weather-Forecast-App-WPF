@@ -20,7 +20,7 @@ public class GeocodingService
     {
         try
         {
-            string url = $"{BaseUrl}/search?text={Uri.EscapeDataString(city)}&apiKey={_apiKey}";
+            string url = $"{BaseUrl}search?text={Uri.EscapeDataString(city)}&apiKey={_apiKey}";
             var res = await _httpClient.GetAsync(url);
             
             if (!res.IsSuccessStatusCode)

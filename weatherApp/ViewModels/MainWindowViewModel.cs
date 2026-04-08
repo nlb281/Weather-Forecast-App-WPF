@@ -41,6 +41,28 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private string weatherIcon = string.Empty;
     
+    public string ConditionDisplay => Condition switch
+    {
+        "clear" => "Ясно",
+        "partly-cloudy" => "Переменная облачность",
+        "cloudy" => "Облачно",
+        "overcast" => "Пасмурно",
+        "light-rain" => "Небольшой дождь",
+        "rain" => "Дождь",
+        "heavy-rain" => "Сильный дождь",
+        "showers" => "Ливень",
+        "wet-snow" => "Дождь со снегом",
+        "light-snow" => "Небольшой снег",
+        "snow" => "Снег",
+        "heavy-snow" => "Сильный снег",
+        "thunderstorm" => "Гроза",
+        "thunderstorm-with-rain" => "Гроза с дождём",
+        "thunderstorm-with-hail" => "Гроза с градом",
+        "fog" => "Туман",
+        "mist" => "Дымка",
+        _ => Condition
+    };
+    
     public MainWindowViewModel(
         GeocodingService geocodingService,
         WeatherService weatherService,
@@ -127,5 +149,10 @@ public partial class MainWindowViewModel : ObservableObject
         };
     
         favoritesWindow.ShowDialog();
+    }
+    
+    partial void OnConditionChanged(string value)
+    {
+        OnPropertyChanged(nameof(ConditionDisplay));
     }
 }

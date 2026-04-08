@@ -96,7 +96,7 @@
                                    FontSize="28" 
                                    FontWeight="Bold"/>
         
-                        <TextBlock Text="{Binding Condition}" 
+                        <TextBlock Text="{Binding ConditionDisplay}" 
                                    FontSize="16" 
                                    Foreground="#666666"/>
                     </StackPanel>
@@ -110,11 +110,11 @@
                 <Border Style="{StaticResource CardStyle}" Background="#E3F2FD">
                     <StackPanel>
                         <TextBlock Text="ТЕМПЕРАТУРА" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock Text="{Binding Temperature}" 
+                        <TextBlock Text="{Binding Temperature, StringFormat={}{0}°C}" 
                                    FontSize="64" 
                                    FontWeight="Bold"
                                    HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding FeelsLike}" 
+                        <TextBlock Text="{Binding FeelsLike, StringFormat={}Ощущается как {0}°C}" 
                                    Style="{StaticResource LabelStyle}"
                                    Margin="0,5,0,0"/>
                     </StackPanel>
@@ -133,28 +133,28 @@
                     <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,5,5">
                         <StackPanel>
                             <TextBlock Text="ВЛАЖНОСТЬ" Style="{StaticResource LabelStyle}"/>
-                            <TextBlock Text="{Binding Humidity}" Style="{StaticResource ValueStyle}"/>
+                            <TextBlock Text="{Binding Humidity, StringFormat={}{0}%}" Style="{StaticResource ValueStyle}"/>
                         </StackPanel>
                     </Border>
                     
                     <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="5,0,0,5">
                         <StackPanel>
                             <TextBlock Text="ДАВЛЕНИЕ" Style="{StaticResource LabelStyle}"/>
-                            <TextBlock Text="{Binding Pressure}" Style="{StaticResource ValueStyle}"/>
+                            <TextBlock Text="{Binding Pressure, StringFormat={}{0} мм рт. ст.}" Style="{StaticResource ValueStyle}"/>
                         </StackPanel>
                     </Border>
                     
                     <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,5,5,0">
                         <StackPanel>
                             <TextBlock Text="ВЕТЕР" Style="{StaticResource LabelStyle}"/>
-                            <TextBlock Text="{Binding WindSpeed}" Style="{StaticResource ValueStyle}"/>
+                            <TextBlock Text="{Binding WindSpeed, StringFormat={}{0} м/с}" Style="{StaticResource ValueStyle}"/>
                         </StackPanel>
                     </Border>
                     
                     <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardStyle}" Margin="5,5,0,0">
                         <StackPanel>
                             <TextBlock Text="СОСТОЯНИЕ" Style="{StaticResource LabelStyle}"/>
-                            <TextBlock Text="{Binding Condition}" 
+                            <TextBlock Text="{Binding ConditionDisplay}"
                                        Style="{StaticResource ValueStyle}"
                                        FontSize="18"
                                        TextWrapping="Wrap"

@@ -63,7 +63,8 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBox Grid.Column="0" 
-                         Text="{Binding CityName}"
+                         x:Name="CityTextBox"
+                         Text="{Binding CityName, UpdateSourceTrigger=PropertyChanged}"
                          Background="White"
                          Foreground="#333333"
                          FontSize="16"
@@ -76,7 +77,8 @@
                         Grid.Column="1" 
                         Style="{StaticResource ButtonWhiteStyle}"
                         Content="Поиск"
-                        Command="{Binding SearchWeatherCommand}"/>
+                        Command="{Binding SearchWeatherCommand}"
+                        CommandParameter="{Binding Text, ElementName=CityTextBox}"/>
             </Grid>
         </Border>
         

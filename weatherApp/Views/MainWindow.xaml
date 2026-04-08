@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:weatherApp.ViewModels"
         mc:Ignorable="d"
-        Title="Weather App" Height="650" Width="500"
+        Title="Weather App" Height="800" Width="600"
         WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
@@ -64,7 +64,7 @@
                 
                 <TextBox Grid.Column="0" 
                          x:Name="CityTextBox"
-                         Text="{Binding CityName, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding CityName}"
                          Background="White"
                          Foreground="#333333"
                          FontSize="16"
@@ -91,7 +91,7 @@
                     </Grid.ColumnDefinitions>
     
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding CityName}" 
+                        <TextBlock Text="{Binding CityNameInXAML}"
                                    FontSize="28" 
                                    FontWeight="Bold"/>
         
@@ -119,7 +119,7 @@
                     </StackPanel>
                 </Border>
                 
-                <Grid Margin="0,0,0,10">
+                <Grid Margin="0,0,0,40">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -161,7 +161,11 @@
                         </StackPanel>
                     </Border>
                 </Grid>
-                
+                <Button 
+                    Style="{StaticResource ButtonBlueStyle}"
+                    Content="Избранное"
+                    Command="{Binding ShowFavoritesCommand}"
+                    ></Button>
             </StackPanel>
         </ScrollViewer>
     </Grid>

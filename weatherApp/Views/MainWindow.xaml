@@ -27,6 +27,26 @@
             <Setter Property="Foreground" Value="#888888"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
+        
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        
+        <Style x:Key="ButtonWhiteStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Foreground" Value="#2196F3"/>
+            <Setter Property="Background" Value="#ffffff"/>
+        </Style>
+        
+        <Style x:Key="ButtonBlueStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Background" Value="#2196F3"/>
+        </Style>
     </Window.Resources>
     
     <Grid Background="#FFFFFF">
@@ -35,7 +55,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Border Grid.Row="0" Background="#2196F3" Padding="15">
+        <Border Grid.Row="0" Background="#2196F3" Padding="20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -49,37 +69,41 @@
                          FontSize="16"
                          Padding="12,8"
                          BorderThickness="0"
+                         Margin="0 0 10 0"
                          VerticalContentAlignment="Center"/>
                 
-                <Button Grid.Column="1" 
-                        Command="{Binding SearchWeatherCommand}"
+                <Button
+                        Grid.Column="1" 
+                        Style="{StaticResource ButtonWhiteStyle}"
                         Content="Поиск"
-                        Background="White"
-                        Foreground="#2196F3"
-                        FontSize="14"
-                        FontWeight="SemiBold"
-                        Padding="15,8"
-                        Margin="10,0,0,0"
-                        BorderThickness="0"
-                        Cursor="Hand"/>
+                        Command="{Binding SearchWeatherCommand}"/>
             </Grid>
         </Border>
         
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="20">
-                
-                <TextBlock Text="{Binding CityName}" 
-                           FontSize="28" 
-                           FontWeight="Bold" 
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,5"/>
-                
-                <TextBlock Text="{Binding Condition}" 
-                           FontSize="16" 
-                           Foreground="#666666"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,20"/>
-                
+                <Grid Margin="0 0 0 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+    
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding CityName}" 
+                                   FontSize="28" 
+                                   FontWeight="Bold"/>
+        
+                        <TextBlock Text="{Binding Condition}" 
+                                   FontSize="16" 
+                                   Foreground="#666666"/>
+                    </StackPanel>
+    
+                    <Button
+                            Grid.Column="1" 
+                            Style="{StaticResource ButtonBlueStyle}"
+                            Content="В избранное"
+                            Command="{Binding AddToFavoritesCommand}"/>
+                </Grid>
                 <Border Style="{StaticResource CardStyle}" Background="#E3F2FD">
                     <StackPanel>
                         <TextBlock Text="ТЕМПЕРАТУРА" Style="{StaticResource LabelStyle}"/>

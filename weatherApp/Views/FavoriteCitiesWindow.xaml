@@ -78,6 +78,8 @@
                                 
                                 <Button Grid.Column="1" 
                                         Style="{StaticResource DeleteButtonStyle}"
+                                        Command="{Binding DataContext.RemoveFromFavoritesCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        CommandParameter="{Binding}"
                                         Content="Удалить"/>
                             </Grid>
                         </Border>

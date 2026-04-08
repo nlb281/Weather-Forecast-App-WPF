@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DotNetEnv;
 using weatherApp.Models;
 using weatherApp.Services;
+using weatherApp.Views;
 
 namespace weatherApp.ViewModels;
 
@@ -14,6 +16,9 @@ public partial class MainWindowViewModel : ObservableObject
     
     [ObservableProperty]
     private string cityName = string.Empty;
+    
+    [ObservableProperty]
+    private string cityNameInXAML = string.Empty;
     
     [ObservableProperty]
     private double temperature;
@@ -83,6 +88,7 @@ public partial class MainWindowViewModel : ObservableObject
                 WeatherIcon = weatherResponse.Fact.Icon;
                 
                 _repository.UpdateLastCity(city);
+                CityNameInXAML = city;
                 Console.WriteLine("Weather Found");  
             }
             else
@@ -94,5 +100,32 @@ public partial class MainWindowViewModel : ObservableObject
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+    }
+
+    [RelayCommand]
+    private void AddToFavorites()
+    {
+        _repository.AddFavoriteCity(CityName);
+        List<string> cities = _repository.GetFavoriteCities();
+        
+        Console.WriteLine($"Found cities: {cities.Count}");
+        foreach (string city in cities)
+        {
+            Console.WriteLine($"  - {city}");
+        }
+    }
+
+    [RelayCommand]
+    private void ShowFavorites()
+    {
+        var favoritesViewModel = new FavoriteCitiesViewModel(_repository);
+        
+        var favoritesWindow = new FavoriteCitiesWindow
+        {
+            DataContext = favoritesViewModel,
+            Owner = Application.Current.MainWindow
+        };
+    
+        favoritesWindow.ShowDialog();
     }
 }

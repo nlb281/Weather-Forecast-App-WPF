@@ -46,24 +46,21 @@ public partial class MainWindowViewModel : ObservableObject
         _repository = repository;
 
         CityName = _repository.GetLastCity();
-        
-        if (!string.IsNullOrWhiteSpace(CityName))
-        {
-            _ = SearchWeather();
-        }
+
+        Task.Run(async () => await SearchWeather(CityName));
     }
     
     [RelayCommand]
-    private async Task SearchWeather()
+    private async Task SearchWeather(string city)
     {
-        if (string.IsNullOrWhiteSpace(CityName))
-        {
-            return;
-        }
-    
         try
         {
-            GeoapifyResponse? geoResponse = await _geocodingService.GetCoords(CityName);
+            if (string.IsNullOrWhiteSpace(city))
+            {
+                return;
+            }
+            
+            GeoapifyResponse? geoResponse = await _geocodingService.GetCoords(city);
         
             if (geoResponse?.Features == null || geoResponse.Features.Count == 0)
             {
@@ -84,6 +81,8 @@ public partial class MainWindowViewModel : ObservableObject
                 WindSpeed = weatherResponse.Fact.WindSpeed;
                 Condition = weatherResponse.Fact.Condition;
                 WeatherIcon = weatherResponse.Fact.Icon;
+                
+                _repository.UpdateLastCity(city);
                 Console.WriteLine("Weather Found");  
             }
             else
